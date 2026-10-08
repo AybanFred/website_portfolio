@@ -85,8 +85,16 @@ education: [
     },
   ],
 
-  // TODO: replace with real projects (title, description, tech, link).
-  projects: [],
+  // TODO: add more projects as they are added to the Projects section.
+  projects: [
+    {
+      title: 'Document Tracking System (DTMS)',
+      description: "Designed and developed for the Secretariat of the Mayor's Office using Laravel, in coordination with the IT Department Manager.",
+      tech: ['Laravel', 'Livewire', 'MySQL'],
+      code: 'https://github.com/AybanFred/lgu-file-tracking',
+      demo: 'https://drive.google.com/file/d/1Cl8q2XKppyaoKEpzmYAobNPWgzhl7FrQ/view?usp=sharing',
+    },
+  ],
 
   // TODO: real contact details. The site's contact form is the fallback.
   contact: {

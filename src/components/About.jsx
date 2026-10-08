@@ -52,7 +52,11 @@ const About = ({ darkMode }) => {
             ${darkMode ? 'text-brand-sky' : 'text-brand-navy'}`}
             data-aos='fade-up'
             data-aos-delay='500'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic voluptate facere consequatur repellat nulla natus explicabo, nesciunt quia, corrupti nihil labore architecto nam fugiat maxime, nobis nostrum laboriosam totam facilis.
+            I'm an Information Technology graduate (Information Management) from Central Mindanao
+            University, finishing Cum Laude. Since then I've built web applications, automated
+            business workflows, and shipped AI-powered tools, including a document tracking system
+            for a local government's Mayor's Office and AI chat and voice agents. I love practical
+            systems that save people time, and I bring that same focus to every client project.
           </p>
           <div
           className='flex flex-wrap justify-center lg:justify-start gap-4
@@ -63,11 +67,11 @@ const About = ({ darkMode }) => {
             data-aos-delay='600'>
               <div className='text-2xl sm:text-3xl lg:text-4xl font-bold
               text-brand-navy dark:text-brand-blue'>
-                  5+
+                  Cum Laude
               </div>
               <div className={`text-xs sm:text-sm lg:text-base
                  ${darkMode ? 'text-brand-sky' : 'text-brand-navy'}`}>
-                Education
+                BS Information Technology
               </div>
 
             </div>
@@ -77,7 +81,7 @@ const About = ({ darkMode }) => {
             data-aos-delay='600'>
               <div className='text-2xl sm:text-3xl lg:text-4xl font-bold
               text-brand-navy dark:text-brand-blue'>
-                  5+
+                  1.5+
               </div>
               <div className={`text-xs sm:text-sm lg:text-base
                  ${darkMode ? 'text-brand-sky' : 'text-brand-navy'}`}>
@@ -91,16 +95,17 @@ const About = ({ darkMode }) => {
             data-aos-delay='600'>
               <div className='text-2xl sm:text-3xl lg:text-4xl font-bold
               text-brand-navy dark:text-brand-blue'>
-                  5+
+                  10
               </div>
               <div className={`text-xs sm:text-sm lg:text-base
                  ${darkMode ? 'text-brand-sky' : 'text-brand-navy'}`}>
-                Projects Completed
+                Tools & Technologies
               </div>
 
             </div>
           </div>
-          <button
+          <a
+          href='#contact'
           className={`w-full sm:w-auto inline-flex
                                 items-center justify-center
                                 border-2 border-brand-blue py-2 px-4 sm:px-6 hover:shadow-[0_0_40px_rgb(96,139,193,0.7)]
@@ -109,8 +114,8 @@ const About = ({ darkMode }) => {
                                 ${darkMode ? 'text-brand-cream bg-brand-blue/10' : 'text-brand-navy bg-white/90'}`}
                                 data-aos='fade-up'
                                 data-aos-delay='800'>
-            Learn More
-          </button>
+            Work With Me
+          </a>
 
         </article>
       </div>

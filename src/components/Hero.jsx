@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Eye, Mail } from 'lucide-react'
 import { motion, useReducedMotion } from 'framer-motion'
 import CVModal from './CVModal'
+import Typewriter from './Typewriter'
+import TypeOnce from './TypeOnce'
 import { FaPython, FaReact, FaLaravel, FaVuejs, FaHtml5, FaCss3Alt } from 'react-icons/fa'
 import canva from '../assets/canva.svg'
 import instagram from '../assets/instagram.png'
@@ -11,6 +13,20 @@ import facebook from '../assets/facebook.png'
 import hero from '../assets/hero2.png'
 import hi from '../assets/hi.png'
 import CV from '../assets/CV.pdf'
+
+const roles = ['Full Stack Developer', 'Data Analyst', 'Virtual Assistant'];
+
+const gradientText = {
+    background: 'var(--gradient-brand-text)',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    color: 'transparent'
+};
+
+const headline = [
+    {text: "I'm Ivant, the man from "},
+    {text: 'VantixFlow', style: gradientText},
+];
 
 const Hero = ({ darkMode }) => {
     // Each PNG has different transparent padding around its circle, so `scale`
@@ -34,6 +50,9 @@ const Hero = ({ darkMode }) => {
     ];
     const reduceMotion = useReducedMotion();
     const [cvOpen, setCvOpen] = useState(false);
+    // The role line waits for the headline to finish typing.
+    const [headlineDone, setHeadlineDone] = useState(false);
+    const handleHeadlineDone = useCallback(() => setHeadlineDone(true), []);
 
     const darkTheme = {
         textPrimary: 'text-brand-cream',
@@ -91,13 +110,28 @@ const Hero = ({ darkMode }) => {
                         lg:text-5xl mb-4 font-bold ${theme.textPrimary}`}
                         data-aos='fade-up'
                         data-aos-delay='500'>
-                        Hi, I'm Ivant!
+                        <TypeOnce
+                            segments={headline}
+                            onDone={handleHeadlineDone} />
                     </h1>
+                    <h2 className={`title-font text-xl sm:text-2xl lg:text-3xl mb-4
+                        font-semibold min-h-[1.6em] ${theme.textPrimary}`}
+                        data-aos='fade-up'
+                        data-aos-delay='550'>
+                        I'm a{' '}
+                        <Typewriter
+                            words={roles}
+                            start={headlineDone}
+                            style={gradientText} />
+                    </h2>
                     <p className={`mb-6 sm:mb-8 leading-relaxed max-w-md 
                     sm:max-w-lg ${theme.textSecondary}`}
                     data-aos='fade-up'
                     data-aos-delay='600'>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. In quam laboriosam quidem reiciendis. Excepturi quaerat at quod, praesentium nam molestiae incidunt, vitae, asperiores accusamus a suscipit. Vero voluptates quisquam omnis!
+                        I help businesses build reliable web apps, automate repetitive work, and turn
+                        raw data into clear decisions. A Cum Laude IT graduate with hands-on experience
+                        in Laravel, Vue, Python, and AI-powered tools, I turn ideas into systems that
+                        actually get used. Got a project in mind? Let's make it simple, fast, and dependable.
                     </p>
                     {/* Buttons */}
                     <div className='w-full pt-4 sm:pt-6'>
@@ -138,7 +172,7 @@ const Hero = ({ darkMode }) => {
                 data-aos='fade-left'
                 data-aos-delay='400'>
                     <div className='relative w-4/5 sm:w-3/4 lg:w-full'>
-                    <div className='relative overflow-hidden'>
+                    <div className='relative overflow-hidden rounded-full'>
                         <img 
                         src={hero} 
                         alt="My Image"

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Bot, MessageCircle, Send, X } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
 
 const GREETING = "Hi! I'm Ivant's assistant. Ask me about his skills, services or projects."
 const SUGGESTIONS = [
@@ -9,6 +10,27 @@ const SUGGESTIONS = [
   'What services do you offer?',
   'Tell me about your projects',
 ]
+
+// Markdown elements styled to fit the chat bubble. react-markdown does not
+// render raw HTML, so model output can't inject markup.
+const mdComponents = {
+  p: (props) => <p className='my-1 first:mt-0 last:mb-0' {...props} />,
+  ul: (props) => <ul className='my-1 pl-5 list-disc space-y-0.5' {...props} />,
+  ol: (props) => <ol className='my-1 pl-5 list-decimal space-y-0.5' {...props} />,
+  strong: (props) => <strong className='font-semibold' {...props} />,
+  h1: (props) => <h3 className='mt-2 mb-1 font-bold' {...props} />,
+  h2: (props) => <h3 className='mt-2 mb-1 font-bold' {...props} />,
+  h3: (props) => <h3 className='mt-2 mb-1 font-semibold' {...props} />,
+  a: (props) => (
+    <a target='_blank' rel='noreferrer noopener' className='underline text-brand-blue' {...props} />
+  ),
+  code: (props) => (
+    <code className='px-1 py-0.5 rounded bg-brand-blue/20 text-[0.85em] break-all' {...props} />
+  ),
+  pre: (props) => (
+    <pre className='my-1 p-2 rounded-lg bg-brand-blue/15 overflow-x-auto text-xs' {...props} />
+  ),
+}
 
 // Floating chat assistant. Rendered in a portal on document.body so AOS
 // transforms on ancestor sections can't break `position: fixed`.
@@ -49,11 +71,24 @@ const ChatWidget = ({ darkMode }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: next }),
       })
-      const data = await res.json().catch(() => ({}))
-      if (!res.ok || !data.reply) {
+      if (!res.ok || !res.body) {
+        const data = await res.json().catch(() => ({}))
         throw new Error(data.error || 'Something went wrong. Please try again.')
       }
-      setMessages([...next, { role: 'assistant', content: data.reply }])
+
+      // Read the plain-text stream and grow the assistant bubble as tokens arrive.
+      const reader = res.body.getReader()
+      const decoder = new TextDecoder()
+      let reply = ''
+      for (;;) {
+        const { done, value } = await reader.read()
+        if (done) break
+        reply += decoder.decode(value, { stream: true })
+        setMessages([...next, { role: 'assistant', content: reply }])
+      }
+      reply += decoder.decode()
+      if (!reply.trim()) throw new Error('Something went wrong. Please try again.')
+      setMessages([...next, { role: 'assistant', content: reply }])
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.')
     } finally {
@@ -117,15 +152,17 @@ const ChatWidget = ({ darkMode }) => {
 
               {messages.map((m, i) => (
                 <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[85%] px-3 py-2 text-sm whitespace-pre-wrap break-words ${m.role === 'user'
-                    ? 'rounded-2xl rounded-tr-sm text-white bg-linear-to-r from-brand-navy to-brand-blue'
+                  <div className={`max-w-[85%] px-3 py-2 text-sm wrap-break-word ${m.role === 'user'
+                    ? 'whitespace-pre-wrap rounded-2xl rounded-tr-sm text-white bg-linear-to-r from-brand-navy to-brand-blue'
                     : `rounded-2xl rounded-tl-sm ${bubbleBot}`}`}>
-                    {m.content}
+                    {m.role === 'user'
+                      ? m.content
+                      : <ReactMarkdown components={mdComponents}>{m.content}</ReactMarkdown>}
                   </div>
                 </div>
               ))}
 
-              {loading && (
+              {loading && messages[messages.length - 1]?.role === 'user' && (
                 <div className={`inline-flex gap-1 px-3 py-3 rounded-2xl rounded-tl-sm ${bubbleBot}`}
                   aria-label='Assistant is typing'>
                   {[0, 1, 2].map((d) => (

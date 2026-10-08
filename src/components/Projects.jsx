@@ -1,36 +1,15 @@
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
 
-import project1 from '../assets/hero.png'
+import project1 from '../assets/DTMS logo.png'
 
 const Projects = ({ darkMode }) => {
     const projects = [
         {
             id: 1,
-            title: 'E-Commerce Platform',
-            desc: 'lorem chu chu',
+            title: 'Document Tracking System',
+            desc: "Designed and developed the DTMS for the Secretariat of the Mayor's Office using Laravel, in coordination with the IT Department Manager.",
             image: project1,
-            tags: ['React', 'Node.js', 'MongoDB']
-        },
-        {
-            id: 2,
-            title: 'Project 2',
-            desc: 'lorem chu chu',
-            image: project1,
-            tags: ['React', 'Node.js', 'MongoDB']
-        },
-        {
-            id: 3,
-            title: 'Project 3',
-            desc: 'lorem chu chu',
-            image: project1,
-            tags: ['React', 'Node.js', 'MongoDB']
-        },
-        {
-            id: 4,
-            title: 'E-Commerce Platform',
-            desc: 'lorem chu chu',
-            image: project1,
-            tags: ['React', 'Node.js', 'MongoDB']
+            tags: ['Laravel', 'Livewire', 'MySQL']
         },
     ]
     return (
@@ -61,7 +40,7 @@ const Projects = ({ darkMode }) => {
                     <p
                         className='max-w-xl mx-auto'
                         style={{ color: darkMode ? "var(--color-brand-sky)" : "var(--color-brand-navy)" }}>
-                        A showcase of my recent work
+                        Real systems built for real users. Here's some of my recent work.
                     </p>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12'>
@@ -110,7 +89,9 @@ const Projects = ({ darkMode }) => {
                                 </div>
                                 <div className='flex gap-2'>
                                     {/* Github link */}
-                                    <a href="#"
+                                    <a href="https://github.com/AybanFred/lgu-file-tracking"
+                                        target="_blank"
+                                        rel="noreferrer"
                                         style={{
                                             backgroundColor: darkMode ? "var(--color-brand-navy)" : "var(--color-brand-sky)",
                                             color: darkMode ? "var(--color-brand-cream)" : 'var(--color-brand-navy)'
@@ -123,7 +104,9 @@ const Projects = ({ darkMode }) => {
                                         <span>Code</span>
                                     </a>
                                     {/* Demo */}
-                                    <a href="#"
+                                    <a href="https://drive.google.com/file/d/1Cl8q2XKppyaoKEpzmYAobNPWgzhl7FrQ/view?usp=sharing"
+                                        target="_blank"
+                                        rel="noreferrer"
                                         style={{
                                             background: 'var(--gradient-brand)'
                                         }}
@@ -142,7 +125,7 @@ const Projects = ({ darkMode }) => {
                         </div>
                     ))}
                 </div>
-                <div
+                {/* <div
                     className='text-center mt-10'>
                     <a href="#"
                         style={{
@@ -159,7 +142,7 @@ const Projects = ({ darkMode }) => {
                         
                     </a>
 
-                </div>
+                </div> */}
 
             </div>
 

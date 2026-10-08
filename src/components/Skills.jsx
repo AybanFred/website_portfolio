@@ -77,7 +77,8 @@ const Skills = ({ darkMode }) => {
                         style={{
                             color: darkMode ? 'var(--color-brand-sky)' : 'var(--color-brand-navy)'
                         }}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto f
+                        A toolkit sharpened on real projects, from Laravel and Vue.js web apps to
+                        Python data work and AI-powered automation.
                     </p>
 
                 </div>
