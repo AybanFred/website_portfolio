@@ -9,6 +9,7 @@ import Services from "./components/Services"
 import Projects from "./components/Projects"
 import Contact from "./components/Contact"
 import Footer from "./components/Footer"
+import ChatWidget from "./components/ChatWidget"
 
 const App = () => {
 
@@ -50,6 +51,7 @@ const App = () => {
       <Projects darkMode = {darkMode} />
       <Contact darkMode = {darkMode} />
       <Footer darkMode = {darkMode} />
+      <ChatWidget darkMode = {darkMode} />
 
     </div>
   )

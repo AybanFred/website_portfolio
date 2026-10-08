@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 src/assets/CV.pdf
+
+.env
+.env.example
