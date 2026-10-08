@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* VantixFlow brand palette. `static` keeps the vars available to inline styles. */
+@theme static {
+  --color-brand-cream: #f3f3e0;
+  --color-brand-navy: #133e87;
+  --color-brand-blue: #608bc1;
+  --color-brand-sky: #cbdceb;
+
+  /* Dark-mode surfaces and light-mode text, derived from the navy above */
+  --color-brand-ink: #0a1f44;
+  --color-brand-night: #071836;
+  --color-brand-night-2: #0c2552;
+}
+
+:root {
+  --gradient-brand: linear-gradient(to right, var(--color-brand-navy), var(--color-brand-blue));
+  --gradient-brand-text: linear-gradient(to right, var(--color-brand-navy), var(--color-brand-blue));
+}
+
+.dark {
+  color-scheme: dark;
+  --gradient-brand-text: linear-gradient(to right, var(--color-brand-sky), var(--color-brand-blue));
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
