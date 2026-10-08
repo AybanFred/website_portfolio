@@ -1,3 +1,4 @@
+import { Rocket } from 'lucide-react'
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
 
 import project1 from '../assets/DTMS logo.png'
@@ -124,6 +125,31 @@ const Projects = ({ darkMode }) => {
                             </div>
                         </div>
                     ))}
+                    {/* Placeholder card until more projects are added */}
+                    <div
+                        style={{
+                            borderColor: darkMode ? 'var(--color-brand-blue)' : 'var(--color-brand-navy)',
+                            backgroundColor: darkMode ? 'rgb(96 139 193 / 0.06)' : 'rgb(19 62 135 / 0.04)'
+                        }}
+                        className='rounded-xl border-2 border-dashed min-h-72 p-6 flex flex-col
+                        items-center justify-center text-center gap-3'
+                        data-aos='fade-up'
+                        data-aos-delay={projects.length * 100}>
+                        <Rocket className='w-10 h-10 text-brand-blue animate-bounce' />
+                        <h3 className='text-lg font-bold'
+                            style={{ color: darkMode ? "var(--color-brand-cream)" : "var(--color-brand-ink)" }}>
+                            More projects coming soon
+                        </h3>
+                        <p className='text-sm max-w-56'
+                            style={{ color: darkMode ? "var(--color-brand-sky)" : "var(--color-brand-navy)" }}>
+                            I'm cooking up something new. Check back soon, or hire me to build yours next.
+                        </p>
+                        <a href='#contact'
+                            className='mt-1 text-sm font-semibold underline underline-offset-4
+                            text-brand-blue hover:text-brand-navy dark:hover:text-brand-sky transition-colors'>
+                            Start a project
+                        </a>
+                    </div>
                 </div>
                 {/* <div
                     className='text-center mt-10'>
