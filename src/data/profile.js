@@ -4,12 +4,12 @@
 
 const profile = {
   name: 'Ivant',
-  tagline: 'Full Stack Developer, Data Analyst & Virtual Assistant',
-  roles: ['Full Stack Developer', 'Virtual Assistant', 'Data Analyst'],
+  tagline: 'Full Stack Developer & Automation Developer',
+  roles: ['Full Stack Developer', 'Automation Developer'],
 
 // TODO: write a short real bio (education, background, what you enjoy).
 
-bio: 'I am an Information Technology graduate with a specialization in Information Management from Central Mindanao University, where I graduated Cum Laude. I have experience in software development, automation, data analytics, and AI-powered applications. I enjoy building practical systems, improving workflows, working with data, and using technology and AI to solve real-world problems.',
+bio: 'I am an Information Technology graduate with a specialization in Information Management from Central Mindanao University, where I graduated Cum Laude. I have experience in software development, automation, and AI-powered applications. I enjoy building practical systems, improving workflows, and using technology and AI to solve real-world problems.',
 
 // TODO: real years of experience, education, work history.
 
@@ -62,16 +62,6 @@ education: [
       title: 'Web Development',
       desc: 'Fast, responsive websites and web apps built end to end.',
       points: ['Laravel & Vue.js apps', 'REST APIs & databases', 'Deployment with Docker'],
-    },
-    {
-      title: 'Virtual Assistance',
-      desc: 'Reliable day-to-day support so you can focus on growth.',
-      points: ['Inbox & calendar management', 'Customer support', 'Research & admin tasks'],
-    },
-    {
-      title: 'Data Analysis',
-      desc: 'Turning raw data into clear, decision-ready insights.',
-      points: ['Data cleaning & reporting', 'Dashboards & visuals', 'Python-based analysis'],
     },
     {
       title: 'Graphic Design',

@@ -1,4 +1,4 @@
-import { ArrowRight, Bot, Check, ChartColumn, Code, Headset, Palette } from 'lucide-react'
+import { ArrowRight, Bot, Check, Code, Palette } from 'lucide-react'
 
 const Services = ({ darkMode }) => {
     const services = [
@@ -7,18 +7,6 @@ const Services = ({ darkMode }) => {
             desc: 'Fast, responsive websites and web apps built end to end.',
             Icon: Code,
             points: ['Laravel & Vue.js apps', 'REST APIs & databases', 'Deployment with Docker'],
-        },
-        {
-            title: 'Virtual Assistance',
-            desc: 'Reliable day-to-day support so you can focus on growth.',
-            Icon: Headset,
-            points: ['Inbox & calendar management', 'Customer support', 'Research & admin tasks'],
-        },
-        {
-            title: 'Data Analysis',
-            desc: 'Turning raw data into clear, decision-ready insights.',
-            Icon: ChartColumn,
-            points: ['Data cleaning & reporting', 'Dashboards & visuals', 'Python-based analysis'],
         },
         {
             title: 'Graphic Design',
@@ -108,9 +96,9 @@ const Services = ({ darkMode }) => {
                         </div>
                     ))}
 
-                    {/* Call to action fills the sixth grid slot */}
+                    {/* Call to action: fills the row on its own at lg, and the fourth slot at md */}
                     <div
-                        className='h-full p-6 rounded-2xl flex flex-col items-center justify-center
+                        className='h-full p-6 rounded-2xl flex flex-col items-center justify-center lg:col-span-3
                         text-center text-white'
                         style={{ background: 'var(--gradient-brand)' }}
                         data-aos='fade-up'

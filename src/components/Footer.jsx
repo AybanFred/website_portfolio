@@ -22,7 +22,7 @@ const Footer = ({ darkMode }) => {
                         <p
                         className="text-sm"
                         style={{ color: darkMode ? "var(--color-brand-blue)" : "var(--color-brand-navy)" }}>
-                            Full Stack Developer & Data Analyst & Virtual Assistant
+                            Full Stack Developer & Automation Developer
                         </p>
 
                     </div>

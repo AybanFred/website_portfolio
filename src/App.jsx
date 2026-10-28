@@ -45,10 +45,10 @@ const App = () => {
     }>
       <NavigationBar darkMode = {darkMode} toggleDarkMode = {toggleDarkMode}/>
       <Hero darkMode = {darkMode} />
-      <About darkMode = {darkMode} />
+      <Projects darkMode = {darkMode} />
       <Skills darkMode = {darkMode} />
       <Services darkMode = {darkMode} />
-      <Projects darkMode = {darkMode} />
+      <About darkMode = {darkMode} />
       <Contact darkMode = {darkMode} />
       <Footer darkMode = {darkMode} />
       <ChatWidget darkMode = {darkMode} />

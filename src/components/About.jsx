@@ -1,4 +1,4 @@
-import { Code, Headset, ChartColumn } from 'lucide-react'
+import { Code, Bot } from 'lucide-react'
 import PortraitFrame from './PortraitFrame'
 import about from '../assets/about.png'
 
@@ -6,10 +6,8 @@ const About = ({ darkMode }) => {
   const badges = [
     {label: 'Full Stack Developer', Icon: Code,
       pos: 'bottom-6 -left-4 sm:-left-10', delay: 0},
-    {label: 'Virtual Assistant', Icon: Headset,
+    {label: 'Automation Developer', Icon: Bot,
       pos: 'top-1/3 -right-4 sm:-right-10', delay: 0.8},
-    {label: 'Data Analyst', Icon: ChartColumn,
-      pos: 'bottom-[12%] -right-4 sm:-right-10', delay: 1.6},
   ];
 
   return (
@@ -81,7 +79,7 @@ const About = ({ darkMode }) => {
             data-aos-delay='600'>
               <div className='text-2xl sm:text-3xl lg:text-4xl font-bold
               text-brand-navy dark:text-brand-blue'>
-                  1.5+
+                  2+
               </div>
               <div className={`text-xs sm:text-sm lg:text-base
                  ${darkMode ? 'text-brand-sky' : 'text-brand-navy'}`}>

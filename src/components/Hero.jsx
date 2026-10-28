@@ -14,7 +14,7 @@ import hero from '../assets/hero2.png'
 import hi from '../assets/hi.png'
 import CV from '../assets/CV.pdf'
 
-const roles = ['Full Stack Developer', 'Data Analyst', 'Virtual Assistant'];
+const roles = ['Full Stack Developer', 'Automation Developer'];
 
 const gradientText = {
     background: 'var(--gradient-brand-text)',
