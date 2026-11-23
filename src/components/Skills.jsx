@@ -1,4 +1,5 @@
-import { div } from 'framer-motion/client'
+import { Bot, Code, Cloud, Database, BarChart3, Palette } from 'lucide-react'
+import profile from '../data/profile'
 import laravel from '../assets/icons/laravel.svg';
 import vue from '../assets/icons/vue.svg';
 import php from '../assets/icons/php.svg';
@@ -10,56 +11,39 @@ import github from '../assets/icons/github.svg';
 import ai from '../assets/icons/ai.svg';
 import canva from '../assets/icons/canva.svg';
 
+// Optional logo per skill; skills without one render as plain chips.
+const skillIcons = {
+    'Laravel': laravel,
+    'Vue.js': vue,
+    'PHP': php,
+    'Python': python,
+    'MongoDB': mongodb,
+    'MySQL': mysql,
+    'Docker': docker,
+    'Git & GitHub': github,
+    'AI Voice & Chat Agents': ai,
+    'Canva': canva,
+}
+
+// Icon for each group header, matched by the group titles in profile.skillGroups.
+const groupIcons = {
+    'AI Automation': Bot,
+    'Full Stack Development': Code,
+    'Databases & Backend': Database,
+    'Cloud & DevOps': Cloud,
+    'Data & Machine Learning': BarChart3,
+    'Design': Palette,
+}
+
 const Skills = ({ darkMode }) => {
-    const skills = [
-    {
-        name: 'Laravel', icon: laravel, level: 90,
-        color: 'from-brand-navy to-brand-blue'
-    },
-    {
-        name: 'Vue.js', icon: vue, level: 85,
-        color: 'from-brand-blue to-brand-sky'
-    },
-    {
-        name: 'PHP', icon: php, level: 88,
-        color: 'from-brand-navy to-brand-blue'
-    },
-    {
-        name: 'Python', icon: python, level: 80,
-        color: 'from-brand-blue to-brand-sky'
-    },
-    {
-        name: 'MongoDB', icon: mongodb, level: 78,
-        color: 'from-brand-navy to-brand-blue'
-    },
-    {
-        name: 'MySQL', icon: mysql, level: 82,
-        color: 'from-brand-blue to-brand-sky'
-    },
-    {
-        name: 'Docker', icon: docker, level: 70,
-        color: 'from-brand-navy to-brand-blue'
-    },
-    {
-        name: 'Git & GitHub', icon: github, level: 85,
-        color: 'from-brand-blue to-brand-sky'
-    },
-    {
-        name: 'AI Integration', icon: ai, level: 82,
-        color: 'from-brand-navy to-brand-blue'
-    },
-    {
-        name: 'Canva', icon: canva, level: 88,
-        color: 'from-brand-blue to-brand-sky'
-    },
-    ]
+    const groups = profile.skillGroups
     return (
         <section id="skills"
             style={{ backgroundColor: darkMode ? "var(--color-brand-night)" : "var(--color-brand-cream)" }}
             className='py-14 relative overflow-hidden'>
             <div className='container mx-auto px-4 sm:px-8 lg:px-14 relative'>
-                <div className='text-center mb-20' data-aos='fade-up'>
-                    <h1 className='sm:text-4xl text-3xl font-bold title-font mb-4'
+                <div className='text-center mb-14' data-aos='fade-up'>
+                    <h2 className='sm:text-4xl text-3xl font-bold title-font mb-4'
                         style={{ color: darkMode ? 'var(--color-brand-cream)' : 'var(--color-brand-ink)' }}>
                         My <span
                             style={{
@@ -69,29 +53,20 @@ const Skills = ({ darkMode }) => {
                                 color: 'transparent'
                             }}>
                             Skills
-
                         </span>
-
-                    </h1>
+                    </h2>
                     <p className='text-lg max-w-2xl mx-auto leading-relaxed'
                         style={{
                             color: darkMode ? 'var(--color-brand-sky)' : 'var(--color-brand-navy)'
                         }}>
-                        A toolkit sharpened on real projects, from Laravel and Vue.js web apps to
-                        Python data work and AI-powered automation.
+                        AI automation first, backed by full stack web development, built and used on real projects.
                     </p>
-
                 </div>
-                <div className='flex flex-wrap -m-4'
-                    data-aos='fade-up'
-                    data-aos-delay='200'>
-                    {skills.map((skill, index) => (
-                        <div key={index}
-                            className='p-4 lg:w-1/4 md:w-1/2 w-full'
-                            data-aos='fade-up'
-                            data-aos-delay={`${300 + index * 100}`}
-                        >
-                            <div
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                    {groups.map(({ title, items }, index) => {
+                        const GroupIcon = groupIcons[title] ?? Code
+                        return (
+                            <div key={title}
                                 style={{
                                     background: darkMode
                                         ? 'linear-gradient(to bottom right, var(--color-brand-night-2), var(--color-brand-night))'
@@ -99,87 +74,40 @@ const Skills = ({ darkMode }) => {
                                     borderColor: darkMode ? 'var(--color-brand-navy)' : 'var(--color-brand-sky)'
                                 }}
                                 className='h-full p-6 rounded-2xl border hover:border-brand-blue/40 transition-all
-                        duration-300 hover:-translate-y-2 group hover:shadow-[0_0_30px_rgb(96,139,193,0.15)]'>
-                                <div className='flex items-center mb-6'>
+                                duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgb(96,139,193,0.15)]'
+                                data-aos='fade-up'
+                                data-aos-delay={index * 100}>
+                                <div className='flex items-center mb-5'>
                                     <div
-                                        style={{
-                                            background: darkMode
-                                                ? 'linear-gradient(to bottom right, var(--color-brand-navy), var(--color-brand-night-2))'
-                                                : 'linear-gradient(to bottom right, #ffffff, var(--color-brand-sky))',
-                                        }}
-                                        className='w-16 h-16 rounded-xl p-3 flex items-center justify-center
-                            group-hover:scale-110 transition-transform duration-300'>
-                                        <img src={skill.icon} alt={skill.name}
-                                            className='w-full h-full object-contain' />
-
+                                        style={{ background: 'var(--gradient-brand)' }}
+                                        className='w-11 h-11 rounded-xl flex items-center justify-center text-white'>
+                                        <GroupIcon className='w-5 h-5' />
                                     </div>
-                                    <h3 className='text-xl font-bold ml-4'
-                                        style={{
-                                            color: darkMode
-                                                ? 'var(--color-brand-cream)'
-                                                : 'var(--color-brand-ink)',
-                                        }}>
-                                        {skill.name}
+                                    <h3 className='text-lg font-bold ml-3'
+                                        style={{ color: darkMode ? 'var(--color-brand-cream)' : 'var(--color-brand-ink)' }}>
+                                        {title}
                                     </h3>
-
                                 </div>
-                                <div className='mb-2 flex justify-between items-center'>
-                                    <span
-                                        className='font-medium'
-                                        style={{
-                                            color: darkMode
-                                                ? 'var(--color-brand-sky)'
-                                                : 'var(--color-brand-navy)',
-                                        }}>
-                                        Proficiency
-                                    </span>
-                                    <span
-                                        style={{
-                                            background: 'var(--gradient-brand-text)',
-                                            WebkitBackgroundClip: 'text',
-                                            backgroundClip: 'text',
-                                            color: 'transparent'
-                                        }}
-                                        className='font-bold'>
-                                        {skill.level}%
-
-                                    </span>
-                                </div>
-                                <div
-                                    className='w-full rounded-full h-3 overflow-hidden'
-                                    style={{
-                                        backgroundColor: darkMode
-                                            ? 'rgb(203 220 235 / 0.18)'
-                                            : 'var(--color-brand-sky)',
-                                    }}>
-                                    <div
-                                        className={`h-full rounded-full bg-linear-to-r ${skill.color}
-                                transition-all duration-1000 ease-out`}
-                                        style={{ width: `${skill.level}%` }}>
-                                    </div>
-
-                                </div>
-                                <div className={`mt-6 pt-4 border-t ${darkMode ? 'border-brand-navy'
-                                    : 'border-brand-sky'}`}>
-                                        <div className='h-1 rounded-full opacity-70 group-hover:w-full transition-all
-                                        duration-500 w-1/3'
-                                        style={{
-                                            background: 'var(--gradient-brand)',
-                                            
-                                        }}
-                                        >
-
-                                        </div>
-
-                                </div>
+                                <ul className='flex flex-wrap gap-2'>
+                                    {items.map((item) => (
+                                        <li key={item}
+                                            style={{
+                                                backgroundColor: darkMode ? 'var(--color-brand-navy)' : 'var(--color-brand-sky)',
+                                                color: darkMode ? 'var(--color-brand-cream)' : 'var(--color-brand-navy)'
+                                            }}
+                                            className='inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full'>
+                                            {skillIcons[item] && (
+                                                <img src={skillIcons[item]} alt='' className='w-4 h-4 object-contain' />
+                                            )}
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
-                        </div>
-                    ))}
-
+                        )
+                    })}
                 </div>
-
             </div>
-
         </section>
     );
 };

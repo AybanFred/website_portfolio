@@ -1,4 +1,8 @@
-import { FaFacebook, FaGithub, FaHeart, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaHeart, FaLinkedin } from "react-icons/fa";
+import profile from "../data/profile";
+
+const socialIcons = { GitHub: FaGithub, LinkedIn: FaLinkedin };
+const socials = profile.contact.socials.map((s) => ({ ...s, Icon: socialIcons[s.name] }));
 
 
 const Footer = ({ darkMode }) => {
@@ -17,40 +21,29 @@ const Footer = ({ darkMode }) => {
                     items-center gap-6">
                     <div className="text-center md:text-left">
                         <h3 className="text-2xl font-bold mb-2 text-brand-navy dark:text-brand-cream">
-                            Portfolio
+                            Ivant Fred Ondoy
                         </h3>
                         <p
                         className="text-sm"
                         style={{ color: darkMode ? "var(--color-brand-blue)" : "var(--color-brand-navy)" }}>
-                            Full Stack Developer & Automation Developer
+                            Full Stack & AI Automation Developer · VantixFlow
                         </p>
 
                     </div>
                     <div className="flex gap-4">
-                        <a href="#"
-                        className="w-10 h-10 rounded-full flex bg-brand-navy dark:bg-brand-sky
-                        text-white justify-center items-center hover:scale-110 transition-all
-                        hover:bg-linear-to-r hover:from-brand-blue
-                        hover:to-brand-navy hover:text-white dark:text-brand-navy">
-                            <FaGithub />
-                        </a>
-
-                        <a href="#"
-                        className="w-10 h-10 rounded-full flex bg-brand-navy dark:bg-brand-sky
-                        text-white justify-center items-center hover:scale-110 transition-all
-                        hover:bg-linear-to-r hover:from-brand-blue
-                        hover:to-brand-navy hover:text-white dark:text-brand-navy">
-                            <FaLinkedin />
-                        </a>
-
-                        <a href="#"
-                        className="w-10 h-10 rounded-full flex bg-brand-navy dark:bg-brand-sky
-                        text-white justify-center items-center hover:scale-110 transition-all
-                        hover:bg-linear-to-r hover:from-brand-blue
-                        hover:to-brand-navy hover:text-white dark:text-brand-navy">
-                            <FaFacebook />
-                        </a>
-
+                        {socials.map(({ name, url, Icon }) => (
+                            <a key={name}
+                            href={url}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={name}
+                            className="w-10 h-10 rounded-full flex bg-brand-navy dark:bg-brand-sky
+                            text-white justify-center items-center hover:scale-110 transition-all
+                            hover:bg-linear-to-r hover:from-brand-blue
+                            hover:to-brand-navy hover:text-white dark:text-brand-navy">
+                                <Icon />
+                            </a>
+                        ))}
                     </div>
                     <div className="text-center md:text-right">
                         <p className="text-sm flex items-center justify-end
@@ -58,7 +51,7 @@ const Footer = ({ darkMode }) => {
                             @ {currentYear} Made with
                             <FaHeart className="text-red-500"/>
                             by <span className="font-semibold text-brand-navy dark:text-brand-blue">
-                                Ivant
+                                Ivant Fred Ondoy
                             </span>
 
                         </p>

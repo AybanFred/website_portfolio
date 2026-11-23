@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {motion} from "framer-motion";
-import { a } from "framer-motion/client";
 import { Sun, Moon, Menu, X } from "lucide-react";
 
 
@@ -61,7 +60,7 @@ const NavigationBar = ({darkMode, toggleDarkMode}) => {
             whileHover= {{scale: 1.05}}
             className="flex items-center space-x-2">
               <span className={`text-xl font-bold ${colors.textPrimary}`}>
-                Portfolio<span
+                VantixFlow<span
                 className="text-brand-blue">.</span>
               </span>
             </motion.a>

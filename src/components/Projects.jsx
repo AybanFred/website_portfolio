@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Rocket } from 'lucide-react'
+import { Bot, Database, FileLock2, Workflow } from 'lucide-react'
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
 
 import ProjectSlideshow from './ProjectSlideshow'
@@ -104,7 +104,7 @@ const ProjectCard = ({ project, index, darkMode }) => {
                         <FaGithub className='text-sm' />
                         <span>Code</span>
                     </a>
-                    {/* Demo */}
+                    {/* Demo: only shown once a project has a live link. Add `demo: '<url>'` to the project to show it. */}
                     {project.demo ? (
                         <a href={project.demo}
                             target="_blank"
@@ -120,24 +120,98 @@ const ProjectCard = ({ project, index, darkMode }) => {
                             <FaExternalLinkAlt className='text-sm' />
                             <span>Demo</span>
                         </a>
-                    ) : (
-                        // No recording yet: keep the button visible but disabled. Add `demo: '<url>'` to the project to enable it.
-                        <button
-                            type='button'
-                            disabled
-                            title='Demo coming soon'
-                            style={{
-                                background: 'var(--gradient-brand)'
-                            }}
-                            className='flex-1 flex items-center justify-center gap-1.5 text-white
-                                    px-3 py-2 text-sm rounded-lg opacity-50 cursor-not-allowed'
-                            data-aos='zoom-in'
-                            data-aos-delay='400'>
-                            <FaExternalLinkAlt className='text-sm' />
-                            <span>Demo</span>
-                        </button>
-                    )}
+                    ) : null}
                 </div>
+            </div>
+        </div>
+    )
+}
+
+// Professional AI automation and full stack work. Client details stay private, so each is written
+// as problem / solution / result. Add `image: <import>` to a study to show a screenshot of a
+// Make scenario or GoHighLevel pipeline (with sensitive details hidden) at the top of its card.
+const caseStudies = [
+    {
+        title: 'Workflow Automation: Make, GoHighLevel & Airtable',
+        Icon: Workflow,
+        problem: 'Client and project data lived in separate tools, so it had to be re-entered by hand and records drifted out of sync.',
+        solution: 'Built Make scenarios and Google Cloud API integrations, plus CRM pipelines in GoHighLevel and Airtable, to move data between platforms automatically.',
+        result: 'Automated pipelines and database-driven workflows that keep project and client data consistent without manual copying.',
+        tags: ['Make.com', 'GoHighLevel', 'Airtable', 'Google Cloud'],
+    },
+    {
+        title: 'AI Voice & Chat Agents',
+        Icon: Bot,
+        problem: 'Customers and staff needed quick answers and workflow help at any hour, without waiting on a person.',
+        solution: 'Integrated LLM-powered voice and chat agents into company systems, and built Gemini/OpenAI chatbots with prompt engineering, Prism PHP, Laravel and Vue.',
+        result: 'Conversational support and workflow assistance over both text and voice.',
+        tags: ['LLMs', 'Prompt Engineering', 'OpenAI', 'Gemini', 'Prism PHP'],
+    },
+    {
+        title: 'Bid Vault System',
+        Icon: FileLock2,
+        problem: 'Bid documents and project workflows needed one secure, organized home instead of scattered files.',
+        solution: 'Built a full stack web app with React, TypeScript and Supabase for secure document management and project workflows.',
+        result: 'A scalable, cloud-based system for managing business documents securely.',
+        tags: ['React', 'TypeScript', 'Supabase'],
+    },
+    {
+        title: 'Advanced Path Analysis System',
+        Icon: Database,
+        problem: 'Users needed to turn raw data into analysis they could act on.',
+        solution: 'Built a web platform with Laravel and Vue.js, using MongoDB for storage and Python for data processing.',
+        result: 'Efficient data processing with visualizations that support decisions.',
+        tags: ['Laravel', 'Vue.js', 'MongoDB', 'Python'],
+    },
+]
+
+const CaseStudyCard = ({ study, index, darkMode }) => {
+    const { title, Icon, problem, solution, result, tags, image } = study
+    return (
+        <div
+            style={{
+                background: darkMode ? 'linear-gradient(to right, var(--color-brand-night-2), var(--color-brand-night))'
+                    : 'linear-gradient(to right, #ffffff, var(--color-brand-cream))',
+                borderColor: darkMode ? 'var(--color-brand-navy)' : 'var(--color-brand-sky)'
+            }}
+            className='flex flex-col min-w-0 rounded-xl border p-5 sm:p-6 transition-all duration-300
+            hover:border-brand-blue/60'
+            data-aos='fade-up'
+            data-aos-delay={index * 100}>
+            {image && (
+                <img src={image} alt={`${title} screenshot`} className='w-full rounded-lg mb-4' />
+            )}
+            <div className='flex items-center gap-3 mb-4'>
+                <div
+                    style={{ background: 'var(--gradient-brand)' }}
+                    className='w-11 h-11 shrink-0 rounded-xl flex items-center justify-center text-white'>
+                    <Icon className='w-5 h-5' />
+                </div>
+                <h4 className='text-lg font-bold wrap-break-word'
+                    style={{ color: darkMode ? 'var(--color-brand-cream)' : 'var(--color-brand-ink)' }}>
+                    {title}
+                </h4>
+            </div>
+            <dl className='space-y-3 text-sm mb-4'>
+                {[['Problem', problem], ['Solution', solution], ['Result', result]].map(([label, text]) => (
+                    <div key={label}>
+                        <dt className='font-semibold text-brand-blue'>{label}</dt>
+                        <dd style={{ color: darkMode ? 'var(--color-brand-sky)' : 'var(--color-brand-navy)' }}>{text}</dd>
+                    </div>
+                ))}
+            </dl>
+            <div className='flex flex-wrap gap-1.5 mt-auto'>
+                {tags.map((tag) => (
+                    <span
+                        key={tag}
+                        style={{
+                            backgroundColor: darkMode ? 'var(--color-brand-navy)' : 'var(--color-brand-sky)',
+                            color: darkMode ? 'var(--color-brand-sky)' : 'var(--color-brand-navy)'
+                        }}
+                        className='px-2 py-1 text-xs rounded-full'>
+                        {tag}
+                    </span>
+                ))}
             </div>
         </div>
     )
@@ -202,38 +276,39 @@ const Projects = ({ darkMode }) => {
                     <p
                         className='max-w-xl mx-auto'
                         style={{ color: darkMode ? "var(--color-brand-sky)" : "var(--color-brand-navy)" }}>
-                        Real systems built for real users. Here's some of my recent work.
+                        Real systems built for real users: full stack apps and AI automation.
                     </p>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12'>
                     {projects.map((project, index) => (
                         <ProjectCard key={project.id} project={project} index={index} darkMode={darkMode} />
                     ))}
-                    {/* Placeholder card until more projects are added */}
-                    <div
-                        style={{
-                            borderColor: darkMode ? 'var(--color-brand-blue)' : 'var(--color-brand-navy)',
-                            backgroundColor: darkMode ? 'rgb(96 139 193 / 0.06)' : 'rgb(19 62 135 / 0.04)'
-                        }}
-                        className='rounded-xl border-2 border-dashed min-h-72 p-6 flex flex-col
-                        items-center justify-center text-center gap-3'
-                        data-aos='fade-up'
-                        data-aos-delay={projects.length * 100}>
-                        <Rocket className='w-10 h-10 text-brand-blue animate-bounce' />
-                        <h3 className='text-lg font-bold'
-                            style={{ color: darkMode ? "var(--color-brand-cream)" : "var(--color-brand-ink)" }}>
-                            More projects coming soon
-                        </h3>
-                        <p className='text-sm max-w-56'
-                            style={{ color: darkMode ? "var(--color-brand-sky)" : "var(--color-brand-navy)" }}>
-                            I'm cooking up something new. Check back soon, or hire me to build yours next.
-                        </p>
-                        <a href='#contact'
-                            className='mt-1 text-sm font-semibold underline underline-offset-4
-                            text-brand-blue hover:text-brand-navy dark:hover:text-brand-sky transition-colors'>
-                            Start a project
-                        </a>
-                    </div>
+                </div>
+
+                <div className='text-center mb-8 mt-16' data-aos='fade-up'>
+                    <h3
+                        style={{ color: darkMode ? "var(--color-brand-cream)" : "var(--color-brand-ink)" }}
+                        className='text-2xl sm:text-3xl font-bold mb-3'>
+                        AI Automation <span
+                            style={{
+                                background: 'var(--gradient-brand-text)',
+                                WebkitBackgroundClip: 'text',
+                                backgroundClip: 'text',
+                                color: 'transparent'
+                            }}>
+                            Case Studies
+                        </span>
+                    </h3>
+                    <p
+                        className='max-w-xl mx-auto'
+                        style={{ color: darkMode ? "var(--color-brand-sky)" : "var(--color-brand-navy)" }}>
+                        Professional work with client details kept private: the problem, what I built, and the result.
+                    </p>
+                </div>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+                    {caseStudies.map((study, index) => (
+                        <CaseStudyCard key={study.title} study={study} index={index} darkMode={darkMode} />
+                    ))}
                 </div>
                 {/* <div
                     className='text-center mt-10'>

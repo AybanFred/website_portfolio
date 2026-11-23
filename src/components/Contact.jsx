@@ -1,9 +1,22 @@
 import { useState } from 'react'
-import { CircleAlert, CircleCheck, Loader2, MessageCircle, Sparkles } from 'lucide-react'
+import { CircleAlert, CircleCheck, Loader2, MapPin, Mail, MessageCircle, Phone, Sparkles } from 'lucide-react'
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import PortraitFrame from './PortraitFrame'
 import contactImg from '../assets/contact.png'
+import profile from '../data/profile'
 
 const WEB3FORMS_URL = 'https://api.web3forms.com/submit'
+
+const { email, phone, location, socials } = profile.contact
+const linkOf = (name) => socials.find((s) => s.name === name).url
+// Direct contact details shown above the form. `href` is omitted for plain text.
+const contactItems = [
+    {label: 'Email', value: email, href: `mailto:${email}`, Icon: Mail},
+    {label: 'Phone', value: phone, href: `tel:${phone.replace(/\s/g, '')}`, Icon: Phone},
+    {label: 'LinkedIn', value: 'linkedin.com/in/ivantfredondoy', href: linkOf('LinkedIn'), Icon: FaLinkedin, external: true},
+    {label: 'GitHub', value: 'github.com/AybanFred', href: linkOf('GitHub'), Icon: FaGithub, external: true},
+    {label: 'Location', value: location, Icon: MapPin},
+]
 
 const Contact = ({ darkMode }) => {
     // 'idle' | 'sending' | 'success' | 'error'
@@ -95,6 +108,48 @@ const Contact = ({ darkMode }) => {
                     </p>
 
                 </div>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4
+                max-w-4xl mx-auto mb-8 sm:mb-10 md:mb-12"
+                    data-aos='fade-up'>
+                    {contactItems.map(({ label, value, href, Icon, external }) => {
+                        const content = (
+                            <>
+                                <span
+                                    style={{ background: 'var(--gradient-brand)' }}
+                                    className='w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-white'>
+                                    <Icon className='w-5 h-5' />
+                                </span>
+                                <span className='min-w-0'>
+                                    <span className='block text-xs font-semibold uppercase tracking-wide text-brand-blue'>
+                                        {label}
+                                    </span>
+                                    <span className='block text-sm sm:text-base break-words'>{value}</span>
+                                </span>
+                            </>
+                        )
+                        const cardClass = 'flex items-center gap-3 p-3 sm:p-4 rounded-xl border transition-all duration-300'
+                        const cardStyle = {
+                            background: darkMode ? 'linear-gradient(to right, var(--color-brand-night-2), var(--color-brand-night))'
+                                : 'linear-gradient(to right, #ffffff, var(--color-brand-cream))',
+                            borderColor: darkMode ? 'var(--color-brand-navy)' : 'var(--color-brand-sky)',
+                            color: darkMode ? 'var(--color-brand-cream)' : 'var(--color-brand-ink)'
+                        }
+                        return (
+                            <li key={label}>
+                                {href ? (
+                                    <a href={href}
+                                        {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                                        style={cardStyle}
+                                        className={`${cardClass} hover:border-brand-blue/60 hover:-translate-y-0.5`}>
+                                        {content}
+                                    </a>
+                                ) : (
+                                    <div style={cardStyle} className={cardClass}>{content}</div>
+                                )}
+                            </li>
+                        )
+                    })}
+                </ul>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6
             sm:gap-8 md:gap-10 items-center">
                     <div className="flex justify-center order-2 lg:order-1"

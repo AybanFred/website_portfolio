@@ -1,12 +1,16 @@
 import { Code, Bot } from 'lucide-react'
 import PortraitFrame from './PortraitFrame'
 import about from '../assets/about.png'
+import profile from '../data/profile'
+
+// Counted from the Skills section so the two never disagree.
+const toolCount = profile.skillGroups.reduce((n, g) => n + g.items.length, 0)
 
 const About = ({ darkMode }) => {
   const badges = [
     {label: 'Full Stack Developer', Icon: Code,
       pos: 'bottom-6 -left-4 sm:-left-10', delay: 0},
-    {label: 'Automation Developer', Icon: Bot,
+    {label: 'AI Automation', Icon: Bot,
       pos: 'top-1/3 -right-4 sm:-right-10', delay: 0.8},
   ];
 
@@ -50,11 +54,12 @@ const About = ({ darkMode }) => {
             ${darkMode ? 'text-brand-sky' : 'text-brand-navy'}`}
             data-aos='fade-up'
             data-aos-delay='500'>
-            I'm an Information Technology graduate (Information Management) from Central Mindanao
-            University, finishing Cum Laude. Since then I've built web applications, automated
-            business workflows, and shipped AI-powered tools, including a document tracking system
-            for a local government's Mayor's Office and AI chat and voice agents. I love practical
-            systems that save people time, and I bring that same focus to every client project.
+            I'm Ivant Fred Ondoy, an Information Technology graduate (Information Management) from
+            Central Mindanao University, finishing Cum Laude. Since then I've built web applications,
+            automated business workflows with Make, GoHighLevel and Airtable, and shipped AI chat and
+            voice agents, plus a document tracking system for a local government's Mayor's Office.
+            VantixFlow is the brand I build under, and I bring the same focus on practical systems
+            that save people time to every project.
           </p>
           <div
           className='flex flex-wrap justify-center lg:justify-start gap-4
@@ -79,7 +84,7 @@ const About = ({ darkMode }) => {
             data-aos-delay='600'>
               <div className='text-2xl sm:text-3xl lg:text-4xl font-bold
               text-brand-navy dark:text-brand-blue'>
-                  2+
+                  ~2
               </div>
               <div className={`text-xs sm:text-sm lg:text-base
                  ${darkMode ? 'text-brand-sky' : 'text-brand-navy'}`}>
@@ -93,7 +98,7 @@ const About = ({ darkMode }) => {
             data-aos-delay='600'>
               <div className='text-2xl sm:text-3xl lg:text-4xl font-bold
               text-brand-navy dark:text-brand-blue'>
-                  10
+                  {toolCount}
               </div>
               <div className={`text-xs sm:text-sm lg:text-base
                  ${darkMode ? 'text-brand-sky' : 'text-brand-navy'}`}>

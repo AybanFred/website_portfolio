@@ -4,17 +4,19 @@ import { motion, useReducedMotion } from 'framer-motion'
 import CVModal from './CVModal'
 import Typewriter from './Typewriter'
 import TypeOnce from './TypeOnce'
-import { FaPython, FaReact, FaLaravel, FaVuejs, FaHtml5, FaCss3Alt } from 'react-icons/fa'
+import { FaPython, FaReact, FaLaravel, FaVuejs, FaHtml5, FaCss3Alt, FaGithub, FaLinkedin } from 'react-icons/fa'
+import profile from '../data/profile'
 import canva from '../assets/canva.svg'
-import instagram from '../assets/instagram.png'
-import tiktok from '../assets/tiktok.png'
-import github from '../assets/github.png'
-import facebook from '../assets/facebook.png'
 import hero from '../assets/hero2.png'
 import hi from '../assets/hi.png'
 import CV from '../assets/CV.pdf'
 
-const roles = ['Full Stack Developer', 'Automation Developer'];
+// Rotating "I build ..." line under the headline. Keep these short so they fit on phones.
+const buildWords = ['web apps', 'AI agents', 'automations', 'CRM pipelines'];
+const socialIcons = [
+    {Icon: FaGithub, alt: 'GitHub', href: profile.contact.socials.find((s) => s.name === 'GitHub').url},
+    {Icon: FaLinkedin, alt: 'LinkedIn', href: profile.contact.socials.find((s) => s.name === 'LinkedIn').url},
+];
 
 const gradientText = {
     background: 'var(--gradient-brand-text)',
@@ -24,19 +26,11 @@ const gradientText = {
 };
 
 const headline = [
-    {text: "I'm Ivant, the man from "},
-    {text: 'VantixFlow', style: gradientText},
+    {text: 'Full Stack & '},
+    {text: 'AI Automation Developer', style: gradientText},
 ];
 
 const Hero = ({ darkMode }) => {
-    // Each PNG has different transparent padding around its circle, so `scale`
-    // compensates to make the visible circles the same size.
-    const socialIcons = [
-        {icon: instagram, alt: 'Instagram', scale: 1.63},
-        {icon: tiktok, alt: 'TikTok', scale: 1.64},
-        {icon: github, alt: 'Github', scale: 1},
-        {icon: facebook, alt: 'Facebook', scale: 1.09},
-    ];
     // Floating tech icons around the hero image. Use `Icon` for a react-icons
     // component or `src` for an image file; `pos` places it around the image.
     const techIcons = [
@@ -84,28 +78,12 @@ const Hero = ({ darkMode }) => {
             lg:mt-14 mt-14'>
                 <div className='lg:w-1/2 w-full flex flex-col items-center
                 lg:items-start text-center lg:text-left mb-12 lg:mb-0'>
-                    <div className='flex justify-center lg:justify-start
-                    gap-4 sm:gap-6 mb-6 sm:mb-7 w-full'>
-                        {socialIcons.map((social, index) => (
-                            <a 
-                            key={index}
-                            href='#'
-                            target='_blank'
-                            data-aos-delay={`${400 + index * 100}`}
-                            className='transform hover:scale-110 transition-transform
-                            duration-300'>
-                                <img src={social.icon} alt = {social.alt}
-                                style={{ scale: social.scale }}
-                                className={`w-8 h-8 sm:w-10 sm:h-10 object-contain
-                                    ${darkMode
-                                        ? ''
-                                        : 'filter brightness-75'}`}/>
-
-                            </a>
-                        ))}
-
-                    </div>
-
+                    <p className={`text-sm sm:text-base font-semibold tracking-wide mb-3 ${theme.textSecondary}`}
+                        data-aos='fade-up'
+                        data-aos-delay='400'>
+                        Ivant Fred Ondoy <span className='opacity-60'>·</span>{' '}
+                        <span style={gradientText}>VantixFlow</span>
+                    </p>
                     <h1 className={`title-font text-3xl sm:text-4xl
                         lg:text-5xl mb-4 font-bold ${theme.textPrimary}`}
                         data-aos='fade-up'
@@ -118,9 +96,9 @@ const Hero = ({ darkMode }) => {
                         font-semibold min-h-[1.6em] ${theme.textPrimary}`}
                         data-aos='fade-up'
                         data-aos-delay='550'>
-                        I'm a{' '}
+                        I build{' '}
                         <Typewriter
-                            words={roles}
+                            words={buildWords}
                             start={headlineDone}
                             style={gradientText} />
                     </h2>
@@ -128,10 +106,9 @@ const Hero = ({ darkMode }) => {
                     sm:max-w-lg ${theme.textSecondary}`}
                     data-aos='fade-up'
                     data-aos-delay='600'>
-                        I help businesses build reliable web apps, automate repetitive work, and turn
-                        raw data into clear decisions. A Cum Laude IT graduate with hands-on experience
-                        in Laravel, Vue, Python, and AI-powered tools, I turn ideas into systems that
-                        actually get used. Got a project in mind? Let's make it simple, fast, and dependable.
+                        Cum Laude IT graduate with nearly 2 years of experience building full stack web apps
+                        and AI automation: Make, GoHighLevel and Airtable workflows, plus LLM chat and voice
+                        agents, with React, Vue, Laravel and Supabase.
                     </p>
                     {/* Buttons */}
                     <div className='w-full pt-4 sm:pt-6'>
@@ -163,6 +140,22 @@ const Hero = ({ darkMode }) => {
                         </div>
 
                     </div>
+                    <div className='flex justify-center lg:justify-start gap-3 mt-6'
+                    data-aos='fade-up'
+                    data-aos-delay='800'>
+                        {socialIcons.map(({ Icon, alt, href }) => (
+                            <a key={alt}
+                            href={href}
+                            target='_blank'
+                            rel='noreferrer'
+                            aria-label={alt}
+                            className={`w-10 h-10 rounded-full flex items-center justify-center text-xl
+                            transition-all duration-300 hover:scale-110 hover:shadow-[0_0_24px_rgb(96,139,193,0.7)]
+                            ${darkMode ? 'bg-brand-navy text-brand-cream' : 'bg-brand-sky text-brand-navy'}`}>
+                                <Icon />
+                            </a>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Image */}
@@ -175,7 +168,7 @@ const Hero = ({ darkMode }) => {
                     <div className='relative overflow-hidden rounded-full'>
                         <img 
                         src={hero} 
-                        alt="My Image"
+                        alt="Ivant Fred Ondoy"
                         className='w-full h-auto object-over transform hover:scale-105
                         transition-transform duration-500' />
 
@@ -234,7 +227,7 @@ const Hero = ({ darkMode }) => {
         open={cvOpen}
         onClose={() => setCvOpen(false)}
         file={CV}
-        downloadName='Ivant-CV.pdf'
+        downloadName='Ivant-Fred-Ondoy-CV.pdf'
         darkMode={darkMode} />
 
     </div>

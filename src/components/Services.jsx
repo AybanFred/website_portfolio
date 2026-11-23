@@ -3,22 +3,22 @@ import { ArrowRight, Bot, Check, Code, Palette } from 'lucide-react'
 const Services = ({ darkMode }) => {
     const services = [
         {
+            title: 'AI & Automation',
+            desc: 'Smarter workflows that save hours of repetitive work.',
+            Icon: Bot,
+            points: ['Make, GoHighLevel & Zapier workflows', 'AI chat & voice agents', 'CRM & pipeline automation'],
+        },
+        {
             title: 'Web Development',
             desc: 'Fast, responsive websites and web apps built end to end.',
             Icon: Code,
-            points: ['Laravel & Vue.js apps', 'REST APIs & databases', 'Deployment with Docker'],
+            points: ['React, Vue.js & Laravel apps', 'REST APIs & Supabase backends', 'Deployment with Docker'],
         },
         {
             title: 'Graphic Design',
             desc: 'On-brand visuals that make your business look the part.',
             Icon: Palette,
             points: ['Social media graphics', 'Presentations & documents', 'Brand kits in Canva'],
-        },
-        {
-            title: 'AI & Automation',
-            desc: 'Smarter workflows that save hours of repetitive work.',
-            Icon: Bot,
-            points: ['AI tool integration', 'Workflow automation', 'Chatbot setup'],
         },
     ]
 
